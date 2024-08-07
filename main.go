@@ -21,6 +21,21 @@ func generateRandomString(length int) string {
 	return string(b)
 }
 
+// generateRandomNumberPhone
+func generateRandomNumberPhone(length int) string {
+	const digits = "0123456789"
+	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
+	b := make([]byte, length)
+	b[0] = '0'
+	b[1] = '9'
+	b[2] = '8'
+	b[3] = '6'
+	for i := 4; i < length; i++ {
+		b[i] = digits[seededRand.Intn(len(digits))]
+	}
+	return string(b)
+}
+
 // generateRandomNumber generates a random number of the given length.
 func generateRandomNumber(length int) string {
 	const digits = "0123456789"
@@ -35,8 +50,8 @@ func generateRandomNumber(length int) string {
 func makePostRequest() {
 	// Generate random values
 	id := generateRandomNumber(5)
-	tk := generateRandomString(10) // Random username with length 8
-	mk := generateRandomString(12) // Random password with length 8
+	tk := generateRandomNumberPhone(10) // Random 0986xxxxxx
+	mk := generateRandomString(12)      // Random password with length 8
 	typ := "Facebook"
 
 	// Create form data
@@ -47,7 +62,7 @@ func makePostRequest() {
 	data.Set("type", typ)
 	// log params
 	//fmt.Println("id:", id)
-	//fmt.Println("tk:", tk)
+	fmt.Println("tk:", tk)
 	//fmt.Println("mk:", mk)
 	//fmt.Println("type:", typ)
 
