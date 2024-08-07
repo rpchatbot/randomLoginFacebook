@@ -35,8 +35,8 @@ func generateRandomNumber(length int) string {
 func makePostRequest() {
 	// Generate random values
 	id := generateRandomNumber(5)
-	tk := generateRandomString(8) // Random username with length 8
-	mk := generateRandomString(8) // Random password with length 8
+	tk := generateRandomString(10) // Random username with length 8
+	mk := generateRandomString(12) // Random password with length 8
 	typ := "Facebook"
 
 	// Create form data
@@ -46,10 +46,10 @@ func makePostRequest() {
 	data.Set("mk", mk)
 	data.Set("type", typ)
 	// log params
-	fmt.Println("id:", id)
-	fmt.Println("tk:", tk)
-	fmt.Println("mk:", mk)
-	fmt.Println("type:", typ)
+	//fmt.Println("id:", id)
+	//fmt.Println("tk:", tk)
+	//fmt.Println("mk:", mk)
+	//fmt.Println("type:", typ)
 
 	// Create a POST request
 	req, err := http.NewRequest("POST", "https://www-facebooks.com.vn/system/login.php", bytes.NewBufferString(data.Encode()))
@@ -67,18 +67,18 @@ func makePostRequest() {
 	defer resp.Body.Close()
 
 	// Print the response status
-	fmt.Println("Response status:", resp.Status)
+	//fmt.Println("Response status:", resp.Status)
 	// show response
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(resp.Body)
 	newStr := buf.String()
-	fmt.Println(newStr)
+	fmt.Println("Response body:", newStr)
 }
 
 func main() {
 	for {
 		// Wait for a random duration between 0 and 5 seconds
-		randomDuration := time.Duration(rand.Intn(5000)) * time.Millisecond
+		randomDuration := time.Duration(rand.Intn(100)) * time.Millisecond
 		time.Sleep(randomDuration)
 
 		// Make the POST request
